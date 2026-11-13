@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220" role="img" aria-labelledby="title desc">
+  <title id="title">等距向左递推示意</title>
+  <desc id="desc">从右向左依次为 v、u 等点，间距均为 t。最后一段从左向右的函数增量等于负 delta，左侧各段增量更小。</desc>
+  <rect width="700" height="220" rx="12" fill="#f7faf7"/>
+  <text x="350" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#345f50">沿数轴等距向左推</text>
+  <path d="M75 108 H632 M620 101 L632 108 L620 115" fill="none" stroke="#55786a" stroke-width="2"/>
+  <g stroke="#345f50" stroke-width="2" fill="#345f50">
+    <circle cx="130" cy="108" r="4"/><circle cx="270" cy="108" r="4"/><circle cx="410" cy="108" r="4"/><circle cx="550" cy="108" r="4"/>
+  </g>
+  <g font-family="Times New Roman, serif" font-size="22" fill="#27332f" text-anchor="middle">
+    <text x="130" y="140"><tspan font-style="italic">v</tspan> − 3<tspan font-style="italic">t</tspan></text><text x="270" y="140"><tspan font-style="italic">v</tspan> − 2<tspan font-style="italic">t</tspan></text><text x="410" y="140"><tspan font-style="italic">u</tspan> = <tspan font-style="italic">v</tspan> − <tspan font-style="italic">t</tspan></text><text x="550" y="140" font-style="italic">v</text>
+    <text x="200" y="94">&lt; −<tspan font-style="italic">δ</tspan></text><text x="340" y="94">&lt; −<tspan font-style="italic">δ</tspan></text><text x="480" y="94">= −<tspan font-style="italic">δ</tspan></text>
+  </g>
+  <text x="350" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#687570">标注为各段从左向右的函数增量；每段宽度均为 <tspan font-family="Times New Roman, serif" font-style="italic">t</tspan></text>
+  <text x="350" y="204" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#687570">只表示数轴和增量，并非函数曲线</text>
+</svg>

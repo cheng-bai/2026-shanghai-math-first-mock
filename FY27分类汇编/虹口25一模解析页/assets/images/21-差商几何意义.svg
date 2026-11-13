@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 330" role="img" aria-labelledby="title desc">
+  <title id="title">第21题：等距三点的割线斜率</title>
+  <desc id="desc">横坐标依次为a减t、a、a加t的三个示意点，右侧割线比左侧割线更陡。点的位置仅示意，不假设函数连续。</desc>
+  <rect width="660" height="330" fill="#f9fbf8"/>
+  <g font-family="Songti SC, STSong, serif" fill="#27332f">
+    <text x="28" y="30" font-size="18">等距三点：比较左右两段割线的斜率</text>
+    <text x="28" y="56" font-size="14" fill="#687570">示意图仅表示三个函数值，不假设函数连续</text>
+    <path d="M75 270H610" stroke="#87958e" stroke-width="1.5"/>
+    <path d="M155 270V185 M330 270V155 M505 270V85" stroke="#bcc9c0" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <path d="M155 185L330 155" stroke="#688c7c" stroke-width="3"/>
+    <path d="M330 155L505 85" stroke="#b77d41" stroke-width="3"/>
+    <g fill="#345f50"><circle cx="155" cy="185" r="5"/><circle cx="330" cy="155" r="5"/><circle cx="505" cy="85" r="5"/></g>
+    <g font-family="Times New Roman, serif" font-style="italic" font-size="19"><text x="105" y="164">(a−t, f(a−t))</text><text x="296" y="144">(a, f(a))</text><text x="468" y="74">(a+t, f(a+t))</text></g>
+    <g font-size="17" text-anchor="middle"><g font-family="Times New Roman, serif" font-style="italic" font-size="19"><text x="155" y="295">a−t</text><text x="330" y="295">a</text><text x="505" y="295">a+t</text></g><text x="242" y="318">间距 <tspan font-family="Times New Roman, serif" font-style="italic">t</tspan></text><text x="418" y="318">间距 <tspan font-family="Times New Roman, serif" font-style="italic">t</tspan></text></g>
+    <text x="190" y="222" font-size="16" fill="#527866">左段斜率</text><text x="389" y="145" font-size="16" fill="#986329">右段斜率更大</text>
+  </g>
+</svg>
