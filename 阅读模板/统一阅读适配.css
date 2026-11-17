@@ -60,3 +60,57 @@
     [data-reader-family="paper"] aside>div { grid-template-columns:repeat(7,1fr); }
   }
 }
+
+/* Site levels, scroll spy, sticky narrow bar, and non-overlapping answer controls. */
+html { scroll-padding-top:6.5rem; scroll-padding-bottom:1.5rem; }
+html.hold-anchor { background:#f4f5ed; }
+html.hold-anchor body { visibility:hidden; }
+html.anchor-settling [data-reader-family] .read details.answer-disclosure { content-visibility:visible; contain-intrinsic-size:none; }
+[data-reader-family="topic"] article.read a[id] { scroll-margin-top:6.5rem; }
+[data-reader-family="topic"] header.top .identity a,
+[data-reader-family="paper"] header strong a,
+[data-reader-family="paper"] header .brand-home { color:inherit; text-decoration:none; }
+[data-reader-family="topic"] header.top .identity a:hover,
+[data-reader-family="paper"] header strong a:hover { text-decoration:underline; text-underline-offset:.18em; }
+[data-reader-family="topic"] header.top nav { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:.45rem .7rem; }
+[data-reader-family="topic"] .site-levels { display:inline-flex; flex-wrap:wrap; align-items:center; gap:.35rem .75rem; }
+[data-reader-family="topic"] header.top .site-levels a { color:#edf6eb; text-decoration:none; }
+[data-reader-family="topic"] header.top .site-levels a[aria-current="page"] { font-weight:700; border-bottom:2px solid #d8ea9b; }
+[data-reader-family="topic"] header.top .edition-switch { margin:0; background:#eaf3e9; }
+[data-reader-family="topic"] header.top .edition-switch .pdf-download,
+[data-reader-family="topic"] header.top .edition-switch a[download] { display:none; }
+[data-reader-family="topic"] aside.side a[aria-current="page"] { background:#d7ebdd; color:#165b51; font-weight:700; }
+[data-reader-family="topic"] aside.side .section-links a.is-current,
+[data-reader-family="topic"] aside.side .section-links a[aria-current="location"] { background:#165b51; color:#fff; font-weight:700; }
+[data-reader-family="topic"] aside.side .other-topics summary { cursor:pointer; position:sticky; top:0; background:#f4f5ed; z-index:1; padding:.2rem 0; }
+[data-reader-family="topic"] aside.side .other-topics[open] { max-height:min(34vh,16rem); overflow:auto; }
+[data-reader-family="topic"] .batch-controls { position:static; right:auto; bottom:auto; z-index:1; width:auto; max-width:100%; margin:.8rem 0 0; box-shadow:none; }
+[data-reader-family="paper"] .batch-controls { position:static; right:auto; bottom:auto; width:auto; max-width:100%; margin:1rem 0 0; box-shadow:none; }
+[data-reader-family="paper"] header { position:sticky; top:0; z-index:30; }
+[data-reader-family="paper"] header nav, [data-reader-family="paper"] header .bar span { display:flex; flex-wrap:wrap; align-items:center; gap:.35rem .8rem; }
+@media (min-width:761px) {
+  [data-reader-family="topic"] aside.side { display:flex; flex-direction:column; overflow:hidden; max-height:calc(100vh - 5.75rem); }
+  [data-reader-family="topic"] aside.side .section-links { overflow:auto; min-height:0; max-height:38vh; flex:0 1 auto; }
+  [data-reader-family="topic"] aside.side .other-topics { flex:0 1 auto; min-height:0; }
+  [data-reader-family="topic"] aside.side .other-topics[open] { flex:1 1 auto; max-height:none; }
+  [data-reader-family="topic"] aside.side .batch-controls { flex:0 0 auto; display:flex; flex-direction:column; align-items:stretch; }
+  [data-reader-family="topic"] aside.side .batch-controls button { white-space:normal; }
+}
+@media (max-width:760px) {
+  html { scroll-padding-top:8.5rem; }
+  [data-reader-family="topic"]>.top,
+  [data-reader-family="paper"]>header { position:sticky; top:0; z-index:40; padding:.5rem .7rem; }
+  [data-reader-family="topic"] .eyebrow { display:none; }
+  [data-reader-family="topic"] .top-inner { display:flex; flex-wrap:wrap; align-items:center; gap:.35rem .6rem; }
+  [data-reader-family="topic"] header.top nav { flex:1 1 100%; justify-content:flex-start; }
+  [data-reader-family="topic"] .site-levels a[aria-current="page"] { display:none; }
+  [data-reader-family="topic"] header.top .edition-switch { max-width:100%; }
+  [data-reader-family="topic"] aside.side .other-topics[open] { max-height:11rem; }
+  [data-reader-family="topic"] .hero .batch-controls { width:100%; }
+}
+@media print {
+  html.hold-anchor body { visibility:visible; }
+  [data-reader-family] .batch-controls,
+  [data-reader-family] .edition-switch,
+  [data-reader-family] .site-levels { display:none !important; }
+}
