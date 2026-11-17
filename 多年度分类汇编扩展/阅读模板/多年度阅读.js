@@ -1,8 +1,42 @@
 (() => {
+  const releaseHold = () => document.documentElement.classList.remove('hold-anchor');
+  const stylesheet = document.querySelector('link[href*="多年度阅读.css"]');
+  const root = (stylesheet?.getAttribute('href') || '').replace(/阅读模板\/多年度阅读\.css.*$/, '../');
+  const topInner = document.querySelector('header.top .top-inner');
+  const identity = topInner?.querySelector('.identity');
+  if (identity && !identity.querySelector('a') && root) {
+    const home = document.createElement('a');
+    home.href = `${root}index.html`;
+    home.dataset.siteHome = 'true';
+    home.textContent = identity.textContent.trim();
+    identity.replaceChildren(home);
+  }
+  if (topInner && root && !topInner.querySelector('[data-level="home"]')) {
+    const path = decodeURIComponent(location.pathname);
+    const home = document.createElement('a');
+    home.href = `${root}index.html`;
+    home.textContent = '首页';
+    home.dataset.level = 'home';
+    home.dataset.siteHome = 'true';
+    const catalog = document.createElement('a');
+    catalog.href = path.includes('/原卷阅读/') ? '../../本地阅读预览/index.html' : '../index.html';
+    catalog.textContent = '本届专题目录';
+    catalog.dataset.level = 'catalog';
+    topInner.prepend(catalog);
+    topInner.prepend(home);
+    if (path.includes('/本地阅读预览/')) {
+      const here = document.createElement('a');
+      here.href = decodeURIComponent(location.pathname).split('/').pop() || 'index.html';
+      here.textContent = '本专题';
+      here.dataset.level = 'topic';
+      here.setAttribute('aria-current', 'page');
+      catalog.after(here);
+    }
+  }
   const article = document.querySelector('.read');
   const outline = document.getElementById('outline');
   const search = document.getElementById('question-search');
-  if (!article || !outline || !search) return;
+  if (!article || !outline || !search) { releaseHold(); return; }
   const groups = [];
   let group;
   for (const node of [...article.children]) {
@@ -41,6 +75,7 @@
     const link = document.createElement('a');
     link.href = `#${item.heading.id}`;
     link.textContent = `${item.heading.textContent} (${item.cards.length})`;
+    item.link = link;
     const toggle = document.createElement('button');
     toggle.className = 'outline-toggle';
     toggle.type = 'button';
@@ -78,6 +113,21 @@
       card.text = `${card.heading.id} ${text}`.toLocaleLowerCase();
     }
   }
+  const spyOutline = () => {
+    const line = (document.querySelector('header.top')?.offsetHeight || 0) + 12;
+    let current = null;
+    for (const item of groups) {
+      if (!item.heading.hidden && item.heading.getBoundingClientRect().top <= line) current = item;
+    }
+    for (const item of groups) {
+      if (!item.link) continue;
+      const on = item === current;
+      item.link.classList.toggle('is-current', on);
+      if (on) item.link.setAttribute('aria-current', 'location');
+      else if (item.link.getAttribute('aria-current') === 'location') item.link.removeAttribute('aria-current');
+    }
+  };
+  window.addEventListener('scroll', spyOutline, {passive: true});
   const cards = groups.flatMap(item => item.cards);
   const status = document.getElementById('search-status');
   const empty = document.getElementById('empty-result');
@@ -153,12 +203,17 @@
     item.list.hidden = false;
     item.toggle.setAttribute('aria-expanded', 'true');
     const target = document.getElementById(id);
-    target?.scrollIntoView({behavior: 'instant'});
+    if (target) {
+      const offset = (document.querySelector('header.top')?.offsetHeight || 0) + 12;
+      const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+      window.scrollTo(0, top);
+    }
     if (focusTarget && target) {
       if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
       target.focus({preventScroll: true});
     }
     if (target) sectionNavigation = {id, scrollY: window.scrollY, top: target.getBoundingClientRect().top};
+    spyOutline();
   };
   window.addEventListener('hashchange', () => revealHash());
   outline.addEventListener('click', event => {
@@ -259,4 +314,10 @@
   document.querySelectorAll('[data-enhancement]').forEach(element => { element.hidden = false; });
   filter();
   if (location.hash) revealHash();
+  else spyOutline();
+  releaseHold();
+  window.addEventListener('load', () => {
+    if (location.hash) revealHash();
+    releaseHold();
+  });
 })();
