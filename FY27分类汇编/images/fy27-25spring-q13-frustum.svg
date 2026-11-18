@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 0 412 220" role="img" aria-labelledby="title desc">
+  <title id="title">正四棱台</title>
+  <desc id="desc">上底 A1B1C1D1 与下底 ABCD，后侧底边 AD、DC 及侧棱 DD1 用虚线表示。</desc>
+  <g fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 186L210 186L390 103L206 104L20 186" stroke-dasharray="7 6"/>
+    <path d="M20 186L210 186L390 103L233 77L98 112L20 186" stroke-dasharray="none"/>
+    <path d="M98 112L233 77"/>
+    <path d="M98 112L180 39L233 77" stroke-dasharray="none"/>
+    <path d="M180 39L206 104" stroke-dasharray="6 6"/>
+    <path d="M20 186L98 112M210 186L233 77M390 103L233 77"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-style="italic">
+    <text x="0" y="210">A</text><text x="202" y="211">B</text><text x="392" y="101">C</text><text x="182" y="103">D</text>
+    <text x="74" y="112">A<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+    <text x="224" y="98">B<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+    <text x="235" y="66">C<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+    <text x="158" y="34">D<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+  </g>
+</svg>

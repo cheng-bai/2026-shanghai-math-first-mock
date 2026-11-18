@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160" role="img" aria-labelledby="title desc">
+  <title id="title">振幅零点零二的波形</title>
+  <desc id="desc">正弦曲线振幅为零点零二，图中约四个周期，横轴没有数值刻度。</desc>
+  <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 82H306" stroke-width="1.8" marker-end="url(#fy27-q15-arrow-b)"/>
+    <path d="M42 139V15" stroke-width="1.8" marker-end="url(#fy27-q15-arrow-b)"/>
+    <path d="M44 43h14M44 121h14" stroke-width="1.4"/>
+    <path d="M42 82 C52 30 62 30 72 82 C82 134 92 134 102 82 C112 30 122 30 132 82 C142 134 152 134 162 82 C172 30 182 30 192 82 C202 134 212 134 222 82 C232 30 242 30 252 82 C262 134 272 134 282 82" stroke-width="2.4"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="16">
+    <text x="0" y="35" font-size="14">0.02</text>
+    <text x="0" y="137" font-size="14">−0.02</text>
+    <text x="28" y="99">O</text>
+    <text x="25" y="15">y</text>
+    <text x="299" y="101">t</text>
+  </g>
+  <defs>
+    <marker id="fy27-q15-arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111"/>
+    </marker>
+  </defs>
+</svg>

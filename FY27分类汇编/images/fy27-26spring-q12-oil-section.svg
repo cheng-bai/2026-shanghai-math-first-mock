@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 0 288 244" role="img" aria-labelledby="title desc">
+  <title id="title">油壶轴截面尺寸图</title>
+  <desc id="desc">矩形壶身宽六点四厘米，油面到壶底十二点一厘米，斜壶嘴长十三点四厘米，壶嘴口高三厘米。</desc>
+  <g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M65 15H152V215H65Z"/>
+    <path d="M65 76H152"/>
+    <path d="M152 142L214 92M152 155L224 103"/>
+    <path d="M214 92L224 103"/>
+    <path d="M50 76V215" stroke-width="1.4" marker-start="url(#fy27-oil-dim-arrow)" marker-end="url(#fy27-oil-dim-arrow)"/>
+    <path d="M44 76H56M44 215H56" stroke-width="1.2"/>
+    <path d="M65 229H152M65 224V234M152 224V234" stroke-width="1.2"/>
+    <path d="M160 142V155" stroke-width="1.4" marker-start="url(#fy27-oil-dim-arrow)" marker-end="url(#fy27-oil-dim-arrow)"/>
+    <path d="M156 142H164M156 155H164" stroke-width="1.2"/>
+    <path d="M210 96L220 105M214 92L224 103" stroke-width="1.2"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="15">
+    <text x="8" y="132" transform="rotate(-90 8 132)">12.1 cm</text>
+    <text x="87" y="228">6.4 cm</text>
+    <text x="170" y="110" transform="rotate(-36 170 110)">13.4 cm</text>
+    <text x="170" y="158">3 cm</text>
+  </g>
+  <defs>
+    <marker id="fy27-oil-dim-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 220" role="img" aria-labelledby="title desc">
+  <title id="title">四幅散点图</title>
+  <desc id="desc">A 无明显线性相关，B 呈 U 形非线性相关，C 呈负线性相关，D 呈正线性相关。</desc>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="19">
+    <text x="5" y="25" font-weight="bold">A.</text>
+    <text x="285" y="25" font-weight="bold">B.</text>
+    <text x="565" y="25" font-weight="bold">C.</text>
+    <text x="845" y="25" font-weight="bold">D.</text>
+  </g>
+  <g fill="none" stroke="#111" stroke-width="1.8" marker-end="url(#fy27-mh-q13-arrow)">
+    <path d="M70 184V31M70 184H240"/>
+    <path d="M350 184V31M350 184H520"/>
+    <path d="M630 184V31M630 184H800"/>
+    <path d="M910 184V31M910 184H1080"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="17">
+    <text x="48" y="36" font-style="italic">y</text><text x="42" y="205" font-style="italic">O</text><text x="238" y="205" font-style="italic">x</text>
+    <text x="328" y="36" font-style="italic">y</text><text x="322" y="205" font-style="italic">O</text><text x="518" y="205" font-style="italic">x</text>
+    <text x="608" y="36" font-style="italic">y</text><text x="602" y="205" font-style="italic">O</text><text x="798" y="205" font-style="italic">x</text>
+    <text x="888" y="36" font-style="italic">y</text><text x="882" y="205" font-style="italic">O</text><text x="1078" y="205" font-style="italic">x</text>
+  </g>
+  <g fill="#111">
+    <circle cx="142.5" cy="45.0" r="3"/>
+    <circle cx="180.0" cy="48.4" r="3"/>
+    <circle cx="113.4" cy="51.9" r="3"/>
+    <circle cx="213.4" cy="58.7" r="3"/>
+    <circle cx="150.8" cy="65.5" r="3"/>
+    <circle cx="188.3" cy="72.3" r="3"/>
+    <circle cx="80.0" cy="75.7" r="3"/>
+    <circle cx="230.0" cy="75.7" r="3"/>
+    <circle cx="121.7" cy="82.6" r="3"/>
+    <circle cx="163.4" cy="89.4" r="3"/>
+    <circle cx="221.6" cy="89.4" r="3"/>
+    <circle cx="196.7" cy="92.8" r="3"/>
+    <circle cx="113.4" cy="99.7" r="3"/>
+    <circle cx="146.7" cy="106.5" r="3"/>
+    <circle cx="88.4" cy="113.3" r="3"/>
+    <circle cx="230.0" cy="113.3" r="3"/>
+    <circle cx="192.5" cy="116.7" r="3"/>
+    <circle cx="121.7" cy="120.2" r="3"/>
+    <circle cx="171.6" cy="127.0" r="3"/>
+    <circle cx="100.8" cy="130.4" r="3"/>
+    <circle cx="150.8" cy="144.1" r="3"/>
+    <circle cx="175.8" cy="144.1" r="3"/>
+    <circle cx="209.2" cy="144.1" r="3"/>
+    <circle cx="109.2" cy="147.5" r="3"/>
+    <circle cx="134.2" cy="150.9" r="3"/>
+    <circle cx="142.5" cy="164.6" r="3"/>
+    <circle cx="184.2" cy="168.0" r="3"/>
+    <circle cx="510.0" cy="45.0" r="3"/>
+    <circle cx="360.0" cy="82.6" r="3"/>
+    <circle cx="505.6" cy="82.6" r="3"/>
+    <circle cx="368.5" cy="116.8" r="3"/>
+    <circle cx="497.1" cy="116.9" r="3"/>
+    <circle cx="390.0" cy="147.5" r="3"/>
+    <circle cx="484.3" cy="147.5" r="3"/>
+    <circle cx="419.9" cy="168.0" r="3"/>
+    <circle cx="462.9" cy="168.0" r="3"/>
+    <circle cx="640.0" cy="45.0" r="3"/>
+    <circle cx="665.1" cy="59.5" r="3"/>
+    <circle cx="650.1" cy="84.8" r="3"/>
+    <circle cx="675.1" cy="88.5" r="3"/>
+    <circle cx="694.9" cy="95.7" r="3"/>
+    <circle cx="660.0" cy="99.3" r="3"/>
+    <circle cx="700.1" cy="117.4" r="3"/>
+    <circle cx="680.0" cy="121.0" r="3"/>
+    <circle cx="735.0" cy="128.2" r="3"/>
+    <circle cx="715.2" cy="142.8" r="3"/>
+    <circle cx="740.1" cy="146.3" r="3"/>
+    <circle cx="770.1" cy="150.0" r="3"/>
+    <circle cx="745.1" cy="160.9" r="3"/>
+    <circle cx="790.0" cy="168.0" r="3"/>
+    <circle cx="1070.0" cy="45.0" r="3"/>
+    <circle cx="1042.7" cy="60.3" r="3"/>
+    <circle cx="1033.6" cy="75.7" r="3"/>
+    <circle cx="1047.3" cy="87.2" r="3"/>
+    <circle cx="1006.3" cy="91.1" r="3"/>
+    <circle cx="1029.1" cy="91.1" r="3"/>
+    <circle cx="988.2" cy="102.7" r="3"/>
+    <circle cx="1015.5" cy="110.3" r="3"/>
+    <circle cx="974.5" cy="122.0" r="3"/>
+    <circle cx="997.2" cy="122.0" r="3"/>
+    <circle cx="951.8" cy="133.5" r="3"/>
+    <circle cx="938.1" cy="145.0" r="3"/>
+    <circle cx="970.0" cy="144.9" r="3"/>
+    <circle cx="920.0" cy="156.4" r="3"/>
+    <circle cx="947.2" cy="160.4" r="3"/>
+    <circle cx="929.1" cy="168.0" r="3"/>
+  </g>
+  <defs>
+    <marker id="fy27-mh-q13-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111"/>
+    </marker>
+  </defs>
+</svg>

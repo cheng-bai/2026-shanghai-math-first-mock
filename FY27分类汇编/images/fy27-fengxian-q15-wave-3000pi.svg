@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 150" role="img" aria-labelledby="title desc">
+  <title id="title">函数 y 等于零点零一乘以正弦三千 π t 的波形</title>
+  <desc id="desc">正弦曲线振幅为零点零一，图中六个周期，横轴标有五百分之一和五百分之二；波峰与波谷分别到达正负零点零一刻度。</desc>
+  <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M27 77H308" stroke-width="1.8" marker-end="url(#fy27-q15-arrow-c)"/>
+    <path d="M42 137V13" stroke-width="1.8" marker-end="url(#fy27-q15-arrow-c)"/>
+    <path d="M24 50h18M24 104h18M162 72v10M282 72v10" stroke-width="1.4"/>
+    <path d="M42 77 Q52 23 62 77 T82 77 T102 77 T122 77 T142 77 T162 77 T182 77 T202 77 T222 77 T242 77 T262 77 T282 77" stroke-width="2.7"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="15">
+    <text x="88" y="35" font-size="17" font-style="italic">y=0.01sin3000πt</text>
+    <text x="2" y="40" font-size="14">0.01</text>
+    <text x="0" y="126" font-size="14">−0.01</text>
+    <text x="28" y="95">O</text>
+    <text x="25" y="14">y</text>
+    <text x="303" y="96">t</text>
+    <text x="153" y="121" font-size="13">1</text>
+    <text x="149" y="135" font-size="11">500</text>
+    <text x="276" y="121" font-size="13">2</text>
+    <text x="272" y="135" font-size="11">500</text>
+  </g>
+  <defs>
+    <marker id="fy27-q15-arrow-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111"/>
+    </marker>
+  </defs>
+</svg>

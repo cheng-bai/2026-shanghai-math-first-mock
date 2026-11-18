@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 176" role="img" aria-labelledby="title desc">
+  <title id="title">音叉发声示意图</title>
+  <desc id="desc">音叉两臂右侧以两条向外张开的虚线束表示声波。</desc>
+  <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M74 162V74c0-9 5-14 10-14s10 5 10 14v62" stroke-width="5"/>
+    <path d="M126 162V74c0-9-5-14-10-14s-10 5-10 14v62" stroke-width="5"/>
+    <path d="M110 136v26" stroke-width="7"/>
+    <path d="M103 162h14" stroke-width="7"/>
+    <path d="M136 67C151 59 168 52 207 44M136 73c18 2 38 4 68 5" stroke-width="2.5" stroke-dasharray="1 6"/>
+    <path d="M140 70c16-2 35-5 67-11M140 76c18 1 38 3 64 4" stroke-width="1.2" stroke-dasharray="1 5"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 125" role="img" aria-labelledby="title desc">
+  <title id="title">三角形与内部线段</title>
+  <desc id="desc">三角形 ABC 中，点 D 在边 BA 上，连接 CD；原图不标直角或角度数值。</desc>
+  <g fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 20L307 72L67 108Z"/>
+    <path d="M67 108L177 54"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-style="italic">
+    <text x="6" y="17">B</text><text x="168" y="45">D</text><text x="308" y="68">A</text><text x="48" y="124">C</text>
+  </g>
+</svg>

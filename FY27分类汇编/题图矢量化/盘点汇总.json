@@ -1,0 +1,25 @@
+{
+  "pages": 114,
+  "references": 798,
+  "unique_referenced": 300,
+  "missing": [],
+  "all_image_files": 371,
+  "unreferenced_image_files": 71,
+  "by_ext": {
+    "jpg": 671,
+    "png": 119,
+    "svg": 8
+  },
+  "by_pagekind": {
+    "解析页": 148,
+    "学生版": 201,
+    "教师版": 439,
+    "共享资源": 10
+  },
+  "source_kinds": {
+    "img": 575,
+    "script": 213,
+    "动态原图": 5,
+    "动态替换": 5
+  }
+}

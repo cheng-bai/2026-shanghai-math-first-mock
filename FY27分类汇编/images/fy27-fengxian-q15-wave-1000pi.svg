@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-labelledby="title desc">
+  <title id="title">振幅零点零六、周期五百分之一的波形</title>
+  <desc id="desc">正弦曲线振幅为零点零六，在 t 等于五百分之一和五百分之二处完成前两个周期。</desc>
+  <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 102H287" stroke-width="1.8" marker-end="url(#fy27-q15-arrow)"/>
+    <path d="M45 170V22" stroke-width="1.8" marker-end="url(#fy27-q15-arrow)"/>
+    <path d="M35 49h14M35 155h14M165 97v10M285 97v10" stroke-width="1.4"/>
+    <path d="M45 102 C65 31.3 85 31.3 105 102 S145 172.7 165 102 S205 31.3 225 102 S265 172.7 285 102" stroke-width="2.7"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="16">
+    <text x="2" y="37" font-size="14">0.06</text>
+    <text x="0" y="176" font-size="14">−0.06</text>
+    <text x="31" y="119">O</text>
+    <text x="27" y="21">y</text>
+    <text x="284" y="122">t</text>
+    <text x="157" y="145" font-size="14">1</text>
+    <text x="155" y="159" font-size="12">500</text>
+    <text x="277" y="145" font-size="14">2</text>
+    <text x="275" y="159" font-size="12">500</text>
+  </g>
+  <defs>
+    <marker id="fy27-q15-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111"/>
+    </marker>
+  </defs>
+</svg>

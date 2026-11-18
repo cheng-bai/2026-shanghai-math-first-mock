@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210" role="img" aria-labelledby="title desc">
+  <title id="title">上半椭圆与坐标轴</title>
+  <desc id="desc">上半椭圆以原点为中心，左右端点落在 x 轴上，顶点在 y 轴正半轴。</desc>
+  <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 142H340" stroke-width="2" marker-end="url(#fy27-spring-q20-arrow)"/>
+    <path d="M175 196V19" stroke-width="2" marker-end="url(#fy27-spring-q20-arrow)"/>
+    <path d="M40 142A135 55 0 0 1 310 142" stroke-width="2.3"/>
+  </g>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="19">
+    <text x="154" y="172">O</text>
+    <text x="166" y="16">y</text>
+    <text x="335" y="169">x</text>
+  </g>
+  <defs>
+    <marker id="fy27-spring-q20-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111"/>
+    </marker>
+  </defs>
+</svg>
