@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 360" role="img" aria-label="解析图：两条抛物线、x等于1及垂直截线l下标P">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10Z"/></marker></defs>
+  <g fill="none" stroke="#161616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 185H404M95 343V12" marker-end="url(#arrow)"/><path d="M215 16V336M155 16V336" stroke="#777" stroke-width="1.4"/><path d="M95 115Q155 80 215 115M95 185Q155 220 215 325" stroke-width="2.5"/></g>
+  <circle cx="155" cy="168" r="3.5" fill="#161616"/>
+  <g font-family="Times New Roman,serif" font-size="21" fill="#111"><text x="390" y="174" font-style="italic">x</text><text x="107" y="28" font-style="italic">y</text><text x="78" y="204" font-style="italic">O</text><text x="76" y="111">A</text><text x="140" y="100">B</text><text x="140" y="245">C</text><text x="163" y="166" font-style="italic">P</text><text x="163" y="226" font-style="italic">l<tspan baseline-shift="sub" font-size="14">P</tspan></text><text x="225" y="331">x = 1</text><text x="227" y="104">y₁ = −x² + x + 1</text><text x="227" y="130" font-size="17">(0 ≤ x ≤ 1)</text><text x="227" y="264">y₂ = −x² − x</text><text x="227" y="289" font-size="17">(0 ≤ x ≤ 1)</text></g>
+</svg>

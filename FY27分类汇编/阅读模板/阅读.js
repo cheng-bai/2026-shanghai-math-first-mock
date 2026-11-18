@@ -2,6 +2,30 @@
 document.getElementById('open-all')?.addEventListener('click',()=>document.querySelectorAll('.answer').forEach(item=>item.open=true));
 document.getElementById('close-all')?.addEventListener('click',()=>document.querySelectorAll('.answer').forEach(item=>item.open=false));
 const cards=[...document.querySelectorAll('.card')],search=document.getElementById('question-search'),jump=document.getElementById('question-jump'),status=document.getElementById('finder-status'),empty=document.getElementById('empty-result'),version=document.getElementById('version-link');
+const springQuestion=cards.find(card=>card.querySelector('.source-link')?.textContent.includes('来源：26春考回忆·15'));
+if(springQuestion){
+  const vectorImages={'da2e3b76158d3a54.jpg':'fy27-26spring-q15-a.svg','029e7e5e326f01bc.jpg':'fy27-26spring-q15-b.svg','0b2a5c8a0a6a26d8.jpg':'fy27-26spring-q15-c.svg','634506053df97865.jpg':'fy27-26spring-q15-d.svg','d738ea81f89408a0.jpg':'fy27-26spring-q15-solution.svg'};
+  for(const image of springQuestion.querySelectorAll('img')){
+    const original=new URL(image.src);
+    const replacement=vectorImages[original.pathname.split('/').pop()];
+    if(replacement)image.src=new URL(replacement,original).href;
+  }
+  const optionFigures=[...springQuestion.querySelectorAll('.body > figure')];
+  if(optionFigures.length===4&&optionFigures.every(figure=>figure.previousElementSibling?.matches('ol'))){
+    const optionStyle=document.createElement('style');
+    optionStyle.textContent='.spring-q15-options{display:grid;grid-template-columns:repeat(4,minmax(0,160px));gap:.5rem;margin:.6rem 0 1rem}.spring-q15-option{display:flex;align-items:flex-start;min-width:0}.spring-q15-option ol{margin:0;padding-left:1.4em}.spring-q15-option figure{margin:0;min-width:0}.spring-q15-option img{display:block;width:128px;max-width:100%;height:auto}.spring-q15-option figcaption{display:none}@media(max-width:600px){.spring-q15-options{grid-template-columns:repeat(2,minmax(0,160px))}}';
+    document.head.append(optionStyle);
+    const options=document.createElement('div');
+    options.className='spring-q15-options';
+    optionFigures[0].previousElementSibling.before(options);
+    for(const figure of optionFigures){
+      const option=document.createElement('div');
+      option.className='spring-q15-option';
+      option.append(figure.previousElementSibling,figure);
+      options.append(option);
+    }
+  }
+}
 const versionBase=version.getAttribute('href');
 const searchText=new Map(cards.map(card=>[card,(card.querySelector('h2').textContent+' '+card.querySelector('.meta').textContent).toLocaleLowerCase()]));
 document.getElementById('finder').hidden=false;
