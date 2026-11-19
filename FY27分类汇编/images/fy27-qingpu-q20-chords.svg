@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 186" role="img" aria-labelledby="title desc">
+  <title id="title">过右焦点的弦与竖直弦</title>
+  <desc id="desc">在相同尺度下画出两个椭圆。左图的斜弦经过右焦点，右图的竖直弦位于 x 等于 1 处。两图都标出了三角形 ABF1。</desc>
+  <rect x="1" y="1" width="236" height="184" rx="12" fill="#fcfdf9" stroke="#cedbd2"/>
+  <rect x="251" y="1" width="236" height="184" rx="12" fill="#fcfdf9" stroke="#cedbd2"/>
+  <g font-family="PingFang SC, Noto Sans CJK SC, sans-serif" font-size="16" text-anchor="middle" fill="#173d36">
+    <text x="119" y="28">过右焦点的弦</text>
+    <text x="369" y="28">竖直弦 x = 1</text>
+  </g>
+  <g transform="translate(119 99)">
+    <path d="M-104 0H104" stroke="#81958a" stroke-dasharray="4 3"/>
+    <ellipse rx="87.20665" ry="39" fill="none" stroke="#507668" stroke-width="1.6"/>
+    <path d="M-78 0L86.512 -4.914L10.988 38.689Z" fill="#cce7db" stroke="#23725c" stroke-width="1.6"/>
+    <path d="M-78 0H78" stroke="#23725c" stroke-dasharray="4 3"/>
+    <path d="M86.512 -4.914L10.988 38.689" stroke="#17624e" stroke-width="2.5"/>
+    <g fill="#173d36">
+      <circle cx="-78" r="3.2"/><circle cx="78" r="3.2"/>
+      <circle cx="86.512" cy="-4.914" r="3.2"/><circle cx="10.988" cy="38.689" r="3.2"/>
+    </g>
+    <g font-family="Georgia, serif" font-size="17" fill="#173d36">
+      <text x="-91" y="25">F₁</text><text x="80" y="24">F₂</text>
+      <text x="92" y="-10">A</text><text x="14" y="57">B</text>
+    </g>
+  </g>
+  <g transform="translate(369 99)">
+    <path d="M-104 0H104" stroke="#81958a" stroke-dasharray="4 3"/>
+    <ellipse rx="87.20665" ry="39" fill="none" stroke="#507668" stroke-width="1.6"/>
+    <path d="M-78 0L39 -34.883L39 34.883Z" fill="#f5e3b8" stroke="#92631b" stroke-width="1.6"/>
+    <path d="M-78 0H39" stroke="#92631b" stroke-dasharray="4 3"/>
+    <path d="M39 -34.883V34.883" stroke="#8b5b15" stroke-width="2.5"/>
+    <path d="M32 0v7h7" fill="none" stroke="#92631b"/>
+    <g fill="#173d36">
+      <circle cx="-78" r="3.2"/><circle cx="78" r="3.2"/>
+      <circle cx="39" cy="-34.883" r="3.2"/><circle cx="39" cy="34.883" r="3.2"/>
+    </g>
+    <g font-family="Georgia, serif" font-size="17" fill="#173d36">
+      <text x="-91" y="25">F₁</text><text x="80" y="24">F₂</text>
+      <text x="47" y="-37">A</text><text x="46" y="51">B</text>
+    </g>
+  </g>
+</svg>
