@@ -1,0 +1,120 @@
+.paper-print { display: none; }
+.paper-print[data-preparing] { display: block; position: absolute; visibility: hidden; pointer-events: none; width: 176mm; }
+.site-pdf-tools { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; margin: .65rem 0; }
+.site-pdf-download, .site-pdf-tools > button {
+  display: inline-block;
+  padding: .4em .8em;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: .3rem;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+}
+.site-pdf-download[hidden], .site-pdf-status:empty { display: none; }
+
+@page fy27-paper {
+  size: A4;
+  margin: 14mm 17mm 15mm;
+
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font: 8pt Georgia, serif;
+    color: #526681;
+  }
+}
+
+@media print {
+  html:has(body.has-paper-print), body.has-paper-print { background: white; margin: 0; padding: 0; }
+  body.has-paper-print > :not(.paper-print) { display: none !important; }
+
+  body.has-paper-print > .paper-print {
+    --paper-blue: #18467e;
+    --paper-tint: #eaf1fa;
+    --paper-green: #096b5a;
+    --paper-red: #a12132;
+    display: block;
+    page: fy27-paper;
+    color: #142334;
+    font: 10.3pt/1.43 "Songti SC", "Noto Serif CJK SC", "STSong", serif;
+    print-color-adjust: exact;
+    orphans: 2;
+    widows: 2;
+  }
+
+  .paper-print > header { margin: 0 0 4mm; padding: 0; background: none; border: 0; break-after: avoid; }
+
+  .paper-print h1 {
+    margin: 0;
+    padding: 3mm 2.5mm;
+    background: var(--paper-blue);
+    color: white;
+    font: 500 18pt/1.2 "PingFang SC", sans-serif;
+  }
+
+  .paper-print > header p { margin: 1.5mm 0 0; color: var(--paper-blue); font-size: 9pt; }
+  .paper-question { margin-bottom: 2.4mm; }
+  .paper-question:has(.writing-space) { break-inside: avoid; }
+  .paper-question.paper-question-with-answer-page { break-inside: auto; }
+  .paper-question-with-answer-page .writing-space { break-before: page; break-inside: avoid; }
+  .paper-writing-compact .writing-line { height: 8mm; }
+  .paper-question .body { padding: 1.25mm 2.5mm; background: var(--paper-tint); break-inside: avoid; break-after: avoid; }
+  .paper-question .body > :first-child { margin-top: 0; }
+  .paper-question .body > :last-child { margin-bottom: 0; }
+  .paper-number { color: var(--paper-blue); font: 600 10.3pt/1 "Helvetica Neue", sans-serif; }
+  .paper-question .answer-inner { margin-top: 1mm; }
+  .paper-question .answer-inner p { margin: .6mm 0; }
+
+  .paper-key {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: baseline;
+    gap: 2mm;
+    color: var(--paper-green);
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
+  .paper-key h3 {
+    margin: 0;
+    padding: .15mm 2mm;
+    background: var(--paper-green);
+    color: white;
+    font-size: 9.5pt;
+  }
+
+  .paper-key p:first-child { margin-top: 0; }
+  .paper-key p:last-child { margin-bottom: 0; }
+  .paper-key ol { margin: 0; padding-left: 5mm; }
+  .paper-topic { break-inside: avoid; break-after: avoid; }
+  .paper-topic strong { color: var(--paper-red); }
+  .paper-question .answer-inner > h3 { margin: .6mm 0 0; color: var(--paper-green); font-size: 10pt; break-after: avoid; }
+  .paper-print .katex { font-size: 1.04em; }
+  .paper-print .katex-display { margin: 1.2mm 0; break-inside: avoid; }
+  .paper-key .katex-display { margin: 0; }
+  .paper-key .katex-display > .katex { text-align: left; }
+  .paper-print figure { margin: 2mm auto; text-align: center; break-inside: avoid; }
+  .paper-print tbody tr, .paper-print :is(p, li):has(> img) { break-inside: avoid; }
+  .paper-print .body img { max-height: 65mm; width: auto; object-fit: contain; }
+  .paper-print .answer-inner img { max-width: 100%; max-height: 46mm; object-fit: contain; }
+  .paper-print .answer-inner p:has(> img) { text-align: center; }
+  .paper-print .answer-inner p:has(+ p > img, + .paper-figures) { break-after: avoid; }
+  .paper-print .spring-q15-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .paper-figures { display: flex; justify-content: center; align-items: center; gap: 5mm; break-inside: avoid; }
+  .paper-figures > p { min-width: 0; }
+  .paper-print a { color: inherit; text-decoration: none; }
+  .paper-print a[href]::after { content: none; }
+  .paper-print .katex-display { max-width: 100%; overflow: visible; }
+  .paper-print .paper-section { color: var(--paper-blue); font: 600 11.5pt/1.35 "PingFang SC", sans-serif; border-bottom: .4pt solid #bacde2; margin: 3mm 0 1.5mm; padding-bottom: .8mm; break-after: avoid; }
+  .paper-print .paper-notice, .paper-print :is(.issue,.notice) { color: #6d3e22; font-size: 9pt; }
+  .paper-print .paper-question { margin: 0 0 2.4mm; padding: 0; background: none; border: 0; border-radius: 0; }
+  .paper-print .writing-space { display: block; }
+  .paper-generic .writing-space { margin: 1mm 0 2mm; }
+  .paper-generic .writing-line { height: 8mm; border-bottom: .45pt solid #bcc6d4; break-inside: avoid; }
+  .paper-generic :is(p,ul,ol) { margin: 1mm 0; }
+  .paper-generic .answer-inner :is(.answer-body,.solution) { padding: 0; border: 0; background: transparent; }
+  .paper-generic .answer-inner :is(h3,h4) { margin: .6mm 0 0; color: var(--paper-green); font-size: 10pt; break-after: avoid; }
+  .paper-generic img { max-width: 100%; }
+  .paper-generic table { width: auto; max-width: 100%; border-collapse: collapse; }
+}

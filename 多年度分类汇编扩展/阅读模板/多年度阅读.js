@@ -258,59 +258,9 @@
   versionLink?.addEventListener('click', updateVersionTarget);
   versionLink?.addEventListener('auxclick', updateVersionTarget);
   versionLink?.addEventListener('contextmenu', updateVersionTarget);
-  let printState;
-  const preparePrint = () => {
-    if (printState) return;
-    printState = {query: search.value, open: panels.map(panel => panel.open), outline: groups.map(item => item.list.hidden), searchOutline, searchExpanded: new Set(searchExpanded)};
-    search.value = '';
-    filter();
-    panels.forEach(panel => { mount(panel); panel.open = true; });
-    article.querySelectorAll('img').forEach(image => { image.loading = 'eager'; });
-  };
-  const restorePrint = () => {
-    if (!printState) return;
-    panels.forEach((panel, index) => { panel.open = printState.open[index]; });
-    search.value = printState.query;
-    filter();
-    searchOutline = printState.searchOutline;
-    searchExpanded = printState.searchExpanded;
-    groups.forEach((item, index) => {
-      item.list.hidden = printState.outline[index];
-      item.toggle.setAttribute('aria-expanded', String(!item.list.hidden));
-    });
-    printState = null;
-  };
-  window.addEventListener('beforeprint', preparePrint);
-  window.addEventListener('afterprint', restorePrint);
-  document.getElementById('print-topic')?.addEventListener('click', async event => {
-    const button = event.currentTarget;
-    button.disabled = true;
-    button.textContent = '正在准备公式和图片…';
-    let timeout;
-    try {
-      let resources;
-      try {
-        preparePrint();
-        article.getBoundingClientRect();
-        resources = Promise.all([document.fonts.ready, ...[...article.querySelectorAll('img')].map(image => image.decode())]);
-      } finally {
-        restorePrint();
-      }
-      await Promise.race([
-        resources,
-        new Promise((resolve, reject) => { timeout = setTimeout(() => reject(new Error('打印资源准备超时')), 15000); })
-      ]);
-      preparePrint();
-      window.print();
-    } catch {
-      restorePrint();
-      status.textContent = '公式或图片尚未加载完成，请检查网络后重试打印。';
-    } finally {
-      clearTimeout(timeout);
-      button.disabled = false;
-      button.textContent = '打印 / 保存 PDF';
-    }
-  });
+  const exportScript = document.createElement('script');
+  exportScript.src = new URL('../../PDF导出/阅读导出.js', document.currentScript.src).href;
+  document.head.append(exportScript);
   document.querySelectorAll('[data-enhancement]').forEach(element => { element.hidden = false; });
   filter();
   if (location.hash) revealHash();

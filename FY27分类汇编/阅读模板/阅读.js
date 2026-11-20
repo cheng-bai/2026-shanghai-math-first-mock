@@ -40,7 +40,91 @@ function updateVersionLink(){const visible=cards.filter(card=>!card.hidden);if(!
 function resumeScrollTracking(){selectedCard=null}
 window.addEventListener('wheel',resumeScrollTracking,{passive:true});window.addEventListener('touchmove',resumeScrollTracking,{passive:true});window.addEventListener('keydown',event=>{if(!event.target.closest('input,select,textarea,button')&&['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))resumeScrollTracking()});
 let scrollPending=false;window.addEventListener('scroll',()=>{if(scrollPending)return;scrollPending=true;requestAnimationFrame(()=>{updateVersionLink();scrollPending=false})},{passive:true});window.addEventListener('hashchange',()=>{selectedCard=cards.find(card=>card.id===location.hash.slice(1))||null;if(selectedCard&&selectedCard.hidden){search.value='';filterQuestions();selectedCard.scrollIntoView({behavior:'instant',block:'start'})}revealOutline();updateVersionLink()});updateVersionLink();
-let printState=null;
-window.addEventListener('beforeprint',()=>{if(printState!==null)return;printState={answers:[...document.querySelectorAll('.answer')].map(item=>[item,item.open]),cards:cards.map(card=>[card,card.hidden])};printState.answers.forEach(([item])=>item.open=true);printState.cards.forEach(([card])=>card.hidden=false)});
-window.addEventListener('afterprint',()=>{if(printState===null)return;printState.answers.forEach(([item,wasOpen])=>item.open=wasOpen);printState.cards.forEach(([card,wasHidden])=>card.hidden=wasHidden);printState=null});
-document.getElementById('print-topic').addEventListener('click',async()=>{await document.fonts.ready;window.print()});
+const paperMatch=decodeURIComponent(location.pathname).match(/\/整卷\/(\d{2}-(教师|学生)版)\.html$/);
+const printButton=document.getElementById('print-topic');
+const hongkouWritingLines=new Map([[9,2],[10,2],[11,3],[12,3],[16,3]]);
+if(printButton){
+  const edition=document.body.classList.contains('student')?'学生':'教师';
+  window.fy27PrintPaper=()=>buildPaperPrint(edition);
+  const exportScript=document.createElement('script');
+  exportScript.src=new URL('../../PDF导出/阅读导出.js',document.currentScript.src).href;
+  document.head.append(exportScript);
+}
+
+function buildPaperPrint(edition){
+  const paper=document.createElement('section');
+  paper.className='paper-print';
+  const header=document.createElement('header');
+  const title=document.createElement('h1');
+  title.textContent=document.querySelector('main h1').textContent.trim();
+  const subtitle=document.createElement('p');
+  subtitle.textContent=`${edition}版`;
+  header.append(title,subtitle);
+  for(const item of document.querySelectorAll('main > header .notice')){
+    const notice=item.cloneNode(true);
+    notice.classList.add('paper-notice');
+    header.append(notice);
+  }
+  paper.append(header);
+
+  for(const [index,card] of cards.entries()){
+    const question=document.createElement('article');
+    question.className='paper-question';
+    const body=card.querySelector('.body').cloneNode(true);
+    const questionNumber=paperMatch?Number(card.id.slice(1)):index+1;
+    const number=document.createElement('span');
+    number.className='paper-number';
+    number.textContent=`${questionNumber}. `;
+    body.firstElementChild.prepend(number);
+    question.append(body);
+
+    if(edition==='教师'){
+      const content=card.querySelector('.answer-inner')?.cloneNode(true);
+      if(content){
+        const [answer,solution]=content.querySelectorAll(':scope > h3');
+        if(answer){
+          const key=document.createElement('div');
+          key.className='paper-key';
+          const value=document.createElement('div');
+          answer.before(key);
+          key.append(answer,value);
+          while(key.nextElementSibling&&key.nextElementSibling!==solution)value.append(key.nextElementSibling);
+          const topic=card.querySelector('.meta > p');
+          if(topic?.textContent.startsWith('考点：')){
+            const line=document.createElement('p');
+            line.className='paper-topic';
+            const label=document.createElement('strong');
+            label.textContent='考点：';
+            line.append(label,topic.textContent.slice(label.textContent.length));
+            key.after(line);
+          }
+        }
+        for(const image of content.querySelectorAll(':scope > p:has(> img)')){
+          const next=image.nextElementSibling;
+          if(!next?.matches('p:has(> img)'))continue;
+          const row=document.createElement('div');
+          row.className='paper-figures';
+          image.before(row);
+          row.append(image,next);
+        }
+        question.append(content);
+      }
+    }else{
+      const space=card.querySelector('.writing-space')?.cloneNode(true);
+      if(space){
+        const lines=[...space.querySelectorAll('.writing-line')];
+        const compactLines=lines.length<=3?1:lines.length<=5?2:lines.length;
+        const customLines=paperMatch?.[1]==='06-学生版'?hongkouWritingLines.get(questionNumber):undefined;
+        lines.slice(customLines??compactLines).forEach(line=>line.remove());
+        if(paperMatch?.[1]==='07-学生版'&&questionNumber===21)space.classList.add('paper-writing-compact');
+        if(['15-学生版','17-学生版'].includes(paperMatch?.[1])&&questionNumber===19){
+          question.classList.add('paper-question-with-answer-page');
+          space.querySelector('.writing-label').textContent=`第 ${questionNumber} 题 · 作答区`;
+        }
+        question.append(space);
+      }
+    }
+    paper.append(question);
+  }
+  return paper;
+}

@@ -1624,4 +1624,4 @@ g (x) \geq g (m) = \mathrm{e} ^ {t m} - t \mathrm{e} ^ {m} + t (m - 1) = \mathrm
 function mountAnswer(answer){var source=answer.querySelector(':scope > noscript[data-lazy-answer]');if(!source)return;source.insertAdjacentHTML('beforebegin',source.textContent);source.remove()}
 var answers=Array.from(document.querySelectorAll('article.read details.answer-disclosure'));answers.forEach(function(answer){answer.addEventListener('toggle',function(){if(answer.open)mountAnswer(answer)});if(answer.open)mountAnswer(answer)});
 document.querySelectorAll('[data-answer-action]').forEach(function(button){button.addEventListener('click',function(){var open=button.dataset.answerAction==='expand';answers.forEach(function(a){if(open)mountAnswer(a);a.open=open});var status=document.querySelector('.status');if(status)status.textContent=(open?'已展开 ':'已收起 ')+answers.length+' 道题的答案与解析'})});
-</script></body></html>
+</script><script src="../../PDF导出/阅读导出.js"></script></body></html>
