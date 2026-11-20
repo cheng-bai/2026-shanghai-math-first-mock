@@ -35,6 +35,138 @@
     document.head.append(stylesheet);
   });
   const styleReady = loadStyle(new URL('试卷.css', directory));
+  const figureRow = '.reader-figure-row';
+  const figureSelector = 'figure:has(> img[src]), p:has(> img[src])';
+  const optionLabel = /^([A-D])[.．、]$/;
+  const figureLabel = /^图\s*([1-9])\s*[：:]?$/;
+  const imageName = node => decodeURIComponent(new URL((node.matches('img') ? node : node.querySelector(':scope > img')).src).pathname.split('/').pop());
+  const nextBlock = node => {
+    for (let sibling = node.nextSibling; sibling; sibling = sibling.nextSibling) {
+      if (sibling.nodeType === Node.ELEMENT_NODE) return sibling;
+      if (sibling.nodeType === Node.TEXT_NODE && sibling.textContent.trim()) return null;
+    }
+    return null;
+  };
+  const figureBlock = node => node?.matches(figureSelector) && !node.closest(`${figureRow},.spring-q15-options,table`)
+    && node.querySelectorAll('img').length === 1
+    && [...node.children].every(child => child.matches('img,figcaption,strong,b,br'));
+  const bareFigure = node => figureBlock(node) && (node.matches('figure') || !node.textContent.trim());
+  const labelMatch = (node, pattern) => node?.matches('p:not(:has(img))') && node.textContent.trim().match(pattern);
+  const figurePairs = new Map([
+    ['12ed96d559bd468fd0b6.jpg', '5518966a4f431d884117.jpg'],
+    ['2026一模-宝山-15-2026-yimo-baoshan-fig-04.jpg', '2026一模-宝山-15-2026-yimo-baoshan-fig-05.jpg'],
+    ['9230d787414f7073.jpg', '64c859a22b074f9e.jpg'],
+    ['01-12-图1.jpg', '01-12-图2.jpg'],
+    ['fy27-26spring-q12-oil-vessel.svg', 'fy27-26spring-q12-oil-section.svg'],
+  ]);
+  const leadingWaveFigures = new Set(['07-15-图2.jpg', 'a13a4716d362ede1.jpg', 'fy27-fengxian-q15-wave-1000pi.svg']);
+  const separateFigures = new Set(['07-15-图1.jpg', '238064fd5edc1ffc.jpg', 'fy27-fengxian-q15-tuning-fork.svg',
+    '95e9b0a2929c4f02.jpg', '2f4b4d9a566b1f62.jpg']);
+  const paragraphGroups = new Map([
+    ['025f884706906a99.jpg', [['025f884706906a99.jpg', '图1'], ['20c6df3a6f9f83ad.jpg', '图2']]],
+    ['c5fb713b7689a54e.jpg', [['c5fb713b7689a54e.jpg', '甲'], ['e3c7b08710092394.jpg', '乙'],
+      ['60aeb14a8b0ee18a.jpg', '丙'], ['0f4527b57085a873.jpg', '']]],
+  ]);
+
+  function labelledFigures(start, pattern, leading) {
+    const group = [];
+    for (let block = start; block;) {
+      const neighbour = nextBlock(block);
+      const [label, figure] = leading ? [block, neighbour] : [neighbour, block];
+      const match = labelMatch(label, pattern);
+      if (!match || !bareFigure(figure)) break;
+      group.push({ label: match[1], blocks: [block, neighbour] });
+      block = nextBlock(neighbour);
+    }
+    return group;
+  }
+
+  function inlineOptions(start) {
+    const group = [];
+    for (let block = start; figureBlock(block) && block.matches('p'); block = nextBlock(block)) {
+      const match = block.textContent.trim().match(optionLabel);
+      if (!match) break;
+      group.push({ label: match[1], blocks: [block] });
+    }
+    return group;
+  }
+
+  function insertFigureRow(group, options = false, inline = false) {
+    const row = make(inline ? 'span' : 'div', `reader-figure-row${options ? ' reader-figure-options' : ''}`);
+    row.dataset.columns = group.length;
+    row.style.setProperty('--reader-figure-columns', group.length);
+    group[0].blocks[0].before(row);
+    for (const { blocks } of group) {
+      const cell = make(inline ? 'span' : 'div', 'reader-figure-cell');
+      cell.append(...blocks);
+      if (blocks.length === 2) {
+        const caption = cell.querySelector('figcaption[aria-hidden="true"]');
+        if (caption && /^题图\s*\d*$/.test(caption.textContent.trim())) cell.classList.add('reader-figure-numbered');
+      }
+      row.append(cell);
+    }
+  }
+
+  function layoutParagraphFigures(paragraph) {
+    const images = [...paragraph.querySelectorAll(':scope > img[src]')];
+    if (images.length < 2) return;
+    const names = images.map(imageName);
+    const pattern = paragraphGroups.get(names[0]);
+    if (!pattern || pattern.length !== images.length || !pattern.every(([name], index) => name === names[index])) return;
+    const group = [];
+    for (const [index, image] of images.entries()) {
+      const breaks = nextBlock(image);
+      if (!breaks?.matches('br')) return;
+      const [, label] = pattern[index];
+      let last = breaks;
+      if (label) {
+        const caption = breaks.nextSibling;
+        if (caption?.nodeType !== Node.TEXT_NODE || caption.textContent.trim() !== label) return;
+        last = nextBlock(caption);
+        if (!last?.matches('br')) return;
+      }
+      if (images[index + 1] && nextBlock(last) !== images[index + 1]) return;
+      const blocks = [image];
+      while (blocks.at(-1) !== last) blocks.push(blocks.at(-1).nextSibling);
+      if (last.nextSibling?.nodeType === Node.TEXT_NODE && !last.nextSibling.textContent.trim()) blocks.push(last.nextSibling);
+      group.push({ blocks });
+    }
+    insertFigureRow(group, false, true);
+  }
+
+  function layoutFigures(root) {
+    for (const block of root.querySelectorAll('figure,p')) {
+      if (block.closest(figureRow)) continue;
+      if (block.matches('p')) layoutParagraphFigures(block);
+      const inline = inlineOptions(block);
+      const separate = inline.length ? inline : labelledFigures(block, optionLabel, true);
+      if (separate.map(({ label }) => label).join('') === 'ABCD') {
+        insertFigureRow(separate, true);
+        continue;
+      }
+      const next = nextBlock(block);
+      if (bareFigure(block) && bareFigure(next) && figurePairs.get(imageName(block)) === imageName(next)) {
+        insertFigureRow([{ blocks: [block] }, { blocks: [next] }]);
+        continue;
+      }
+      const leading = bareFigure(next) && labelMatch(block, figureLabel)?.[1] === '1'
+        && leadingWaveFigures.has(imageName(next));
+      if (!leading && (!bareFigure(block) || separateFigures.has(imageName(block)))) continue;
+      const group = labelledFigures(block, figureLabel, Boolean(leading));
+      if (group.length >= 2 && group.length <= 4 && group.every(({ label }, index) => Number(label) === index + 1)) {
+        insertFigureRow(group);
+      }
+    }
+  }
+
+  layoutFigures(main);
+  main.addEventListener('toggle', event => {
+    const panel = event.target;
+    if (panel.matches('details[open]')) queueMicrotask(() => layoutFigures(panel));
+  }, true);
+
+  const rowChildren = row => [...row.children].flatMap(cell => [...cell.childNodes]);
+  const readingChildren = node => [...node.children].flatMap(child => child.matches(figureRow) ? rowChildren(child) : [child]);
   const titleText = title.textContent.trim().replace(/\s*[｜·]\s*(?:按解题机制分类汇编|整卷解析(?:初稿)?)$/, '')
     .replace(/\s*[（(](?:教师|学生)版[）)]$|[-\s·]+(?:教师|学生)版$/, '')
     .replace(/^\d{2}-|\s*-详解版$/g, '');
@@ -104,6 +236,7 @@
   const clone = source => {
     const copy = source.cloneNode(true);
     copy.removeAttribute('hidden');
+    for (const row of copy.querySelectorAll(figureRow)) row.replaceWith(...rowChildren(row));
     return copy;
   };
 
@@ -188,7 +321,7 @@
     }
     if (sourceCards.length) {
       for (const [index, card] of sourceCards.entries()) {
-        paper.append(exportQuestion(card.firstElementChild, Array.from(card.children).slice(1), index + 1, ''));
+        paper.append(exportQuestion(card.firstElementChild, readingChildren(card).slice(1), index + 1, ''));
       }
     } else {
       let group = null;
@@ -200,7 +333,7 @@
         paper.append(exportQuestion(question.heading, question.nodes, ++index, group?.textContent || ''));
         question = null;
       };
-      for (const node of article.children) {
+      for (const node of readingChildren(article)) {
         if (node.matches(questionHeading)) {
           flush();
           if (synthesis) group = make('h2', 'paper-section', node.textContent.trim());
@@ -209,7 +342,7 @@
           flush();
           group = make('h2', 'paper-section', node.textContent.trim());
         } else if (node.matches('.question-card')) {
-          question = { heading: node.firstElementChild, nodes: Array.from(node.children).slice(1) };
+          question = { heading: node.firstElementChild, nodes: readingChildren(node).slice(1) };
           flush();
         } else if (question) {
           if (synthesis && node.matches('p') && /^\s*母题[：:]/.test(node.textContent)) continue;
@@ -224,7 +357,7 @@
   let paper;
   function prepare() {
     if (paper) return paper;
-    paper = fy27 ? fy27() : buildGenericPaper();
+    paper = fy27 ? fy27(clone) : buildGenericPaper();
     if (!fy27) paper.classList.add('paper-generic');
     paper.querySelectorAll(omit).forEach(element => element.remove());
     paper.querySelectorAll('p,blockquote').forEach(element => {

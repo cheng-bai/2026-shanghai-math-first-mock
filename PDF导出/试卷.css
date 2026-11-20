@@ -28,6 +28,31 @@
   }
 
   main figure:has(> img[src]):not(.spring-q15-option *) { margin-block: .65rem; }
+
+  main .reader-figure-row {
+    display: grid;
+    grid-template-columns: repeat(var(--reader-figure-columns), minmax(0, 14rem));
+    gap: .65rem;
+    align-items: start;
+    margin: .65rem 0;
+  }
+
+  main .reader-figure-cell { min-width: 0; text-align: center; }
+  main .reader-figure-cell > :is(figure, p) { margin: 0; }
+  main .reader-figure-cell > :is(figure, p) + p { margin-top: .2rem; }
+  main .reader-figure-cell > br { display: none; }
+  main .reader-figure-cell img[src] {
+    display: block;
+    margin: .2rem auto;
+    max-width: 100% !important;
+    max-height: 11rem;
+  }
+  main .reader-figure-numbered figcaption[aria-hidden="true"] { display: none; }
+}
+
+@media screen and (max-width: 640px) {
+  main .reader-figure-row { grid-template-columns: minmax(0, 17rem); }
+  main .reader-figure-row[data-columns="4"] { grid-template-columns: repeat(2, minmax(0, 14rem)); }
 }
 
 @page fy27-paper {

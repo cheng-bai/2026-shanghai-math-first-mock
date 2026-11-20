@@ -45,13 +45,13 @@ const printButton=document.getElementById('print-topic');
 const hongkouWritingLines=new Map([[9,2],[10,2],[11,3],[12,3],[16,3]]);
 if(printButton){
   const edition=document.body.classList.contains('student')?'学生':'教师';
-  window.fy27PrintPaper=()=>buildPaperPrint(edition);
+  window.fy27PrintPaper=clone=>buildPaperPrint(edition,clone);
   const exportScript=document.createElement('script');
   exportScript.src=new URL('../../PDF导出/阅读导出.js',document.currentScript.src).href;
   document.head.append(exportScript);
 }
 
-function buildPaperPrint(edition){
+function buildPaperPrint(edition,clone=node=>node.cloneNode(true)){
   const paper=document.createElement('section');
   paper.className='paper-print';
   const header=document.createElement('header');
@@ -70,7 +70,7 @@ function buildPaperPrint(edition){
   for(const [index,card] of cards.entries()){
     const question=document.createElement('article');
     question.className='paper-question';
-    const body=card.querySelector('.body').cloneNode(true);
+    const body=clone(card.querySelector('.body'));
     const questionNumber=paperMatch?Number(card.id.slice(1)):index+1;
     const number=document.createElement('span');
     number.className='paper-number';
@@ -79,7 +79,8 @@ function buildPaperPrint(edition){
     question.append(body);
 
     if(edition==='教师'){
-      const content=card.querySelector('.answer-inner')?.cloneNode(true);
+      const answerInner=card.querySelector('.answer-inner');
+      const content=answerInner&&clone(answerInner);
       if(content){
         const [answer,solution]=content.querySelectorAll(':scope > h3');
         if(answer){
