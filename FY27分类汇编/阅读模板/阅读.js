@@ -41,6 +41,38 @@ function resumeScrollTracking(){selectedCard=null}
 window.addEventListener('wheel',resumeScrollTracking,{passive:true});window.addEventListener('touchmove',resumeScrollTracking,{passive:true});window.addEventListener('keydown',event=>{if(!event.target.closest('input,select,textarea,button')&&['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))resumeScrollTracking()});
 let scrollPending=false;window.addEventListener('scroll',()=>{if(scrollPending)return;scrollPending=true;requestAnimationFrame(()=>{updateVersionLink();scrollPending=false})},{passive:true});window.addEventListener('hashchange',()=>{selectedCard=cards.find(card=>card.id===location.hash.slice(1))||null;if(selectedCard&&selectedCard.hidden){search.value='';filterQuestions();selectedCard.scrollIntoView({behavior:'instant',block:'start'})}revealOutline();updateVersionLink()});updateVersionLink();
 const paperMatch=decodeURIComponent(location.pathname).match(/\/整卷\/(\d{2}-(教师|学生)版)\.html$/);
+if(paperMatch)addPaperSwitcher(paperMatch[1].slice(0,2),`${paperMatch[2]}版`);
+
+function addPaperSwitcher(currentNumber,edition){
+  const outline=document.querySelector('.sidebar nav[aria-label="本卷题目"]');
+  if(!outline)return;
+  if(!selectedCard)outline.querySelectorAll('.outline-topic[open]').forEach(topic=>topic.open=false);
+  const names=['26春考回忆','25春考','24春考','24秋考','23春考','虹口26二模','奉贤26高三下练','金山26高三下监控','闵行26二模','长宁26高三下调研','徐汇26一模','浦东26高三上期末','青浦26一模','杨浦25一模','虹口25一模','静安25一模','崇明25二模','长宁25二模','黄浦24一模','闵行24一模'];
+  const switcher=document.createElement('nav');
+  switcher.className='paper-switcher';
+  switcher.setAttribute('aria-labelledby','paper-switcher-title');
+  const label=document.createElement('h2');
+  label.id='paper-switcher-title';
+  label.textContent='切换来源卷';
+  const list=document.createElement('ul');
+  for(const [index,name] of names.entries()){
+    const number=String(index+1).padStart(2,'0');
+    const item=document.createElement('li');
+    if(number===currentNumber){
+      item.setAttribute('aria-current','page');
+      item.textContent=`${number} ${name}（当前）`;
+    }else{
+      const link=document.createElement('a');
+      link.href=`./${number}-${edition}.html`;
+      link.textContent=`${number} ${name}`;
+      item.append(link);
+    }
+    list.append(item);
+  }
+  switcher.append(label,list);
+  outline.after(switcher);
+}
+
 const printButton=document.getElementById('print-topic');
 const hongkouWritingLines=new Map([[9,2],[10,2],[11,3],[12,3],[16,3]]);
 if(printButton){
